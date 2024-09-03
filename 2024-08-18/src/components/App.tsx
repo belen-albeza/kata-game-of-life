@@ -20,13 +20,19 @@ function App() {
     cols: 4,
     rows: 3,
   };
+
+  const tick = () => {};
+
   return (
     <div className={styles.wrapper}>
       <header>
         <h1>Game of Life</h1>
       </header>
-      <main>
+      <main className={styles.content}>
         <Display {...board} />
+        <section>
+          <button onClick={() => tick()}>Tick ⏩</button>
+        </section>
       </main>
       <footer>
         <p>
