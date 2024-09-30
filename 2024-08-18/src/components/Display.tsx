@@ -21,7 +21,11 @@ const Display = ({ cells, cols, rows }: DisplayProps) => {
   return (
     <article style={style} className={styles.board}>
       {cells.map((isBusy) => (
-        <div className={styles.cell}>{isBusy ? "🐸" : " "}</div>
+        <div
+          className={`${styles.cell} ${
+            isBusy ? styles.cellAlive : styles.cellDead
+          }`}
+        ></div>
       ))}
     </article>
   );

@@ -1,27 +1,36 @@
 import styles from "./App.module.css";
 import Display from "./Display";
+import { Game } from "../core";
+import { useState, useRef } from "react";
 
 function App() {
-  const board = {
-    cells: [
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-      false,
-      false,
-    ],
-    cols: 4,
-    rows: 3,
-  };
+  const ref = useRef(
+    new Game(`................
+.*..............
+..**............
+.**.............
+................
+................
+................
+................
+................
+................
+................
+................
+................
+................
+................
+................`)
+  );
 
-  const tick = () => {};
+  const [cells, setCells] = useState(ref.current.cells().map((x) => x > 0));
+  const [gen, setGen] = useState(ref.current.generation);
+
+  const tick = () => {
+    ref.current.tick();
+    setCells(ref.current.cells().map((x) => x > 0));
+    setGen(ref.current.generation);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -29,9 +38,18 @@ function App() {
         <h1>Game of Life</h1>
       </header>
       <main className={styles.content}>
-        <Display {...board} />
+        <Display
+          cells={cells}
+          cols={ref.current.width()}
+          rows={ref.current.height()}
+        />
         <section>
-          <button onClick={() => tick()}>Tick ⏩</button>
+          <p>
+            Generation: <b>{gen}</b>
+          </p>
+          <p>
+            <button onClick={() => tick()}>Tick ⏩</button>
+          </p>
         </section>
       </main>
       <footer>

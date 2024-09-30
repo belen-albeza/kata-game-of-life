@@ -7,7 +7,7 @@ describe("Grid", () => {
 ....*...
 ...**...
 ........`;
-    const grid = new Grid(input);
+    const grid = Grid.fromString(input);
 
     expect(grid.width).toBe(8);
     expect(grid.height).toBe(4);
@@ -18,7 +18,7 @@ describe("Grid", () => {
 
   it("Fetches a cell", () => {
     const input = "..x\n..x\n..x";
-    const grid = new Grid(input);
+    const grid = Grid.fromString(input);
 
     expect(grid.cellAt(0, 0)).toBe(0);
     expect(grid.cellAt(2, 2)).toBe(1);
@@ -28,7 +28,7 @@ describe("Grid", () => {
 
   it("Counts the neighbors", () => {
     const input = "..x\n..x\n..x";
-    const grid = new Grid(input);
+    const grid = Grid.fromString(input);
 
     expect(grid.neighborsAt(0, 0)).toBe(0);
     expect(grid.neighborsAt(2, 0)).toBe(1);
@@ -37,9 +37,7 @@ describe("Grid", () => {
 
   it("Iterates over the grid returning the cell and its neighbor count", () => {
     const input = ".xx\n.x.";
-    // .xx
-    // .x.
-    const grid = new Grid(input);
+    const grid = Grid.fromString(input);
 
     const expected = [
       { cell: 0, neighbors: 2 },

@@ -3,19 +3,23 @@ export class Grid {
   width: number;
   height: number;
 
-  constructor(input: string) {
-    this.cells = [];
-    this.width = 0;
-    this.height = 0;
-
+  static fromString(input: string) {
     const rows = input.split("\n");
-    this.height = rows.length;
+    const height = rows.length;
 
-    this.cells = rows
+    const cells = rows
       .map((row) => row.split(""))
       .flat()
       .map((x) => (x === " " || x === "." ? 0 : 1));
-    this.width = this.cells.length / this.height;
+    const width = cells.length / height;
+
+    return new Grid(cells, width, height);
+  }
+
+  constructor(cells: number[], width: number, height: number) {
+    this.cells = cells;
+    this.width = width;
+    this.height = height;
   }
 
   cellAt(x: number, y: number): number {

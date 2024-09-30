@@ -5,17 +5,27 @@ export class Game {
   generation: number;
 
   constructor(input: string) {
-    this.grid = new Grid(input);
-    this.generation = 0;
+    this.grid = Grid.fromString(input);
+    this.generation = 1;
   }
 
   tick() {
-    this.grid.cells = Array.from(this.grid).map(Game.computeCell);
+    const cells = Array.from(this.grid).map(Game.computeCell);
+    this.grid = new Grid(cells, this.grid.width, this.grid.height);
     this.generation += 1;
+    console.log("generation is now", this.generation);
   }
 
   cells(): number[] {
     return Array.from(this.grid).map(({ cell }) => cell);
+  }
+
+  width(): number {
+    return this.grid.width;
+  }
+
+  height(): number {
+    return this.grid.height;
   }
 
   static computeCell({
