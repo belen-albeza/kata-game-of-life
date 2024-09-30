@@ -1,0 +1,26 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: 0.5rem;
+}
+
+.cell {
+  --border-color: transparent;
+  --bg-color: initial;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+}
+
+.cell-dead {
+  --border-color: #ccc;
+}
+
+.cell-alive {
+  --bg-color: #000;
+}
